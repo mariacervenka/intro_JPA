@@ -18,12 +18,13 @@ public class ClienteService {
 
     //metodo construtor pra inicializar as variaveis
     public ClienteService(ClienteRepository repo, ClienteMapper mapper) {
+
         this.repo = repo;
         this.mapper = mapper;
     }
 
 
-    @Transactional
+    @Transactional //Uusa quando vc altera dados na tabela (insere, deleta e atualiza)
     public ClienteResponse salvar(ClienteRequest dto){
 
         Cliente cliente = mapper.paraEntidade(dto);
@@ -32,5 +33,15 @@ public class ClienteService {
 
         return mapper.paraResposta(aux);
     }
+
+
+    public ClienteResponse pesquisar(Long id){
+
+        Cliente cliente = repo.findById(id).orElseThrow();
+
+        return mapper.paraResposta(cliente);
+    }
+
+
 
 }

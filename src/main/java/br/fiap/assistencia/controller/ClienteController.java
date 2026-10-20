@@ -5,7 +5,7 @@ import br.fiap.assistencia.web.dto.ClienteRequest;
 import br.fiap.assistencia.web.dto.ClienteResponse;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@RestController //API REST, VAI DADO VOLTA GRAFICO
 @RequestMapping("/cliente")
 
 
@@ -28,6 +28,13 @@ public class ClienteController {
         return service.salvar(dto);
     }
 
+
+    //select com id
+    @GetMapping("/pesquisar/{id}")
+    public ClienteResponse pesquisar(@PathVariable Long id){
+
+        return service.pesquisar(id);
+    }
 
 
 }
