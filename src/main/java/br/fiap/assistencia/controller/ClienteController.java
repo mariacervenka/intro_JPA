@@ -5,6 +5,8 @@ import br.fiap.assistencia.web.dto.ClienteRequest;
 import br.fiap.assistencia.web.dto.ClienteResponse;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController //API REST, VAI DADO VOLTA GRAFICO
 @RequestMapping("/cliente")
 
@@ -35,6 +37,14 @@ public class ClienteController {
 
         return service.pesquisar(id);
     }
+
+
+    @GetMapping("/listar")
+    public List<ClienteResponse> listar(){
+
+        return service.listar();
+    }
+
 
 
 }

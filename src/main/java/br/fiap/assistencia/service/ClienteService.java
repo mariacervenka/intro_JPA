@@ -8,6 +8,8 @@ import br.fiap.assistencia.web.dto.ClienteResponse;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 
 public class ClienteService {
@@ -43,5 +45,12 @@ public class ClienteService {
     }
 
 
+    public List<ClienteResponse> listar(){
+
+        return repo.findAll()
+                .stream()
+                .map(cliente -> mapper.paraResposta(cliente))
+                .toList();
+    }
 
 }
