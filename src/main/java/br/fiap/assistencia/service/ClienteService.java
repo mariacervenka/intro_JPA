@@ -53,4 +53,34 @@ public class ClienteService {
                 .toList();
     }
 
+
+    //o deletar nao devolve nada, entao ele eh void
+    public void deletar(Long id){
+
+        repo.deleteById(id);
+    }
+
+
+    @Transactional //
+    //o dto nao vai pro dto, so vai pro banco a entidade
+    public ClienteResponse atualizar(Long id, ClienteRequest dto){
+
+        Cliente cliente = repo.findById(id).orElseThrow();
+
+        cliente.setEmail(dto.email());
+        cliente.setNome(dto.nome());
+        cliente.setTelefone(dto.telefone());
+        cliente.setSenha(dto.senha()); //prx aula vmos fzr o hash da senha
+
+        return mapper.paraResposta(cliente);
+    }
+
+
+    public ClienteResponse pesquisarPorEmail(String email){
+
+        Cliente cliente = repo.findClienteByEmail(email).orElseThrow();
+
+        return mapper.paraResposta(cliente);
+    }
+
 }
